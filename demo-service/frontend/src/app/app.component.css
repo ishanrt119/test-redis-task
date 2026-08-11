@@ -1,0 +1,64 @@
+.container {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: 2rem;
+}
+
+.card {
+	width: min(100%, 520px);
+	padding: 2rem;
+	border-radius: 24px;
+	background: rgba(15, 23, 42, 0.88);
+	color: #f8fafc;
+	box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
+	text-align: center;
+}
+
+.eyebrow {
+	margin: 0 0 0.5rem;
+	text-transform: uppercase;
+	letter-spacing: 0.18em;
+	font-size: 0.72rem;
+	color: #94a3b8;
+}
+
+h1 {
+	margin: 0;
+	font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.subtitle {
+	margin: 0.75rem 0 1.5rem;
+	color: #cbd5e1;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+}
+
+button {
+	border: 0;
+	border-radius: 999px;
+	padding: 0.8rem 1.3rem;
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+	background: #e2e8f0;
+	color: #0f172a;
+}
+
+button:hover {
+	background: #f8fafc;
+}
+
+.message {
+	margin-top: 1.5rem;
+	min-height: 1.5rem;
+	font-size: 1.05rem;
+	font-weight: 600;
+	color: #fef08a;
+}

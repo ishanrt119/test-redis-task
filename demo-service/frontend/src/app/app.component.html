@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="card">
+    <p class="eyebrow">Angular + Django demo</p>
+    <h1>Demo Service</h1>
+    <p class="subtitle">Use the buttons to call the backend and show the response below.</p>
+
+    <div class="buttons">
+      <button type="button" (click)="loadHome()">Home</button>
+      <button type="button" (click)="loadContact()">Contact</button>
+    </div>
+
+    <div class="message" aria-live="polite">{{ message }}</div>
+  </div>
+</div>
