@@ -1,0 +1,37 @@
+upstream auth_service {
+    {{ range service "auth-service" }}
+    server {{ .Address }}:{{ .Port }};
+    {{ end }}
+}
+
+upstream home_service {
+    {{ range service "home-service" }}
+    server {{ .Address }}:{{ .Port }};
+    {{ end }}
+}
+
+server {
+    listen 8080;
+    server_name localhost;
+
+    location /api/auth/ {
+        proxy_pass http://auth_service;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /api/home/ {
+        proxy_pass http://home_service;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /api/contact/ {
+        proxy_pass http://home_service;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}

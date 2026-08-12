@@ -1,0 +1,28 @@
+<main class="auth-shell">
+  <div class="auth-card" *ngIf="!isLoggedIn; else loggedInState">
+    <h1>Authentication Service</h1>
+
+    <div class="field-group">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" [(ngModel)]="username" />
+      <div class="error-message" *ngIf="usernameError">{{ usernameError }}</div>
+    </div>
+
+    <div class="field-group">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" [(ngModel)]="password" />
+      <div class="error-message" *ngIf="passwordError">{{ passwordError }}</div>
+    </div>
+
+    <button type="button" class="primary-button" (click)="submitLogin()">Sign In</button>
+
+    <div class="status-message" *ngIf="message">{{ message }}</div>
+  </div>
+
+  <ng-template #loggedInState>
+    <div class="auth-card logged-in-card">
+      <h2>Welcome {{ loggedInUser }}!</h2>
+      <button type="button" class="secondary-button" (click)="logout()">Logout</button>
+    </div>
+  </ng-template>
+</main>

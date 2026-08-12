@@ -1,0 +1,11 @@
+{
+  "service": {
+    "name": "auth-service",
+    "address": "127.0.0.1",
+    "port": 8001,
+    "check": {
+      "http": "http://127.0.0.1:8001/health/",
+      "interval": "10s"
+    }
+  }
+}

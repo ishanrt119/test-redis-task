@@ -1,0 +1,13 @@
+from django.urls import path
+from django.http import JsonResponse
+
+from .views import LoginView
+
+
+
+
+
+urlpatterns = [
+    path('login/', LoginView.as_view(), name='login'),
+    path('health/', LoginView.health, name='health'),
+]
