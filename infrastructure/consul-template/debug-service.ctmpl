@@ -1,0 +1,10 @@
+{{ range services }}
+SERVICE={{ .Name }}
+
+{{ range service .Name }}
+INSTANCE:
+{{ printf "%#v" . }}
+
+{{ end }}
+
+{{ end }}

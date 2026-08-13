@@ -1,0 +1,49 @@
+{{ range services }}
+{{ $serviceName := .Name }}
+
+{{ with service $serviceName }}
+{{ $instance := index . 0 }}
+
+{{ with index $instance.ServiceMeta "expose" }}
+{{ if eq . "true" }}
+
+upstream {{ $serviceName | replaceAll "-" "_" }} {
+{{ range $instance := service $serviceName }}
+    server {{ $instance.Address }}:{{ $instance.Port }};
+{{ end }}
+}
+
+{{ end }}
+{{ end }}
+
+{{ end }}
+{{ end }}
+
+
+server {
+    listen 8080;
+    server_name localhost;
+
+{{ range services }}
+{{ $serviceName := .Name }}
+
+{{ with service $serviceName }}
+{{ $instance := index . 0 }}
+
+{{ with index $instance.ServiceMeta "expose" }}
+{{ if eq . "true" }}
+
+    location {{ index $instance.ServiceMeta "route" }} {
+        proxy_pass http://{{ $serviceName | replaceAll "-" "_" }};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+{{ end }}
+{{ end }}
+
+{{ end }}
+{{ end }}
+
+}

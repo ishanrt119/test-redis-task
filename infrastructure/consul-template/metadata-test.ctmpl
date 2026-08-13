@@ -1,0 +1,23 @@
+{{ range services }}
+
+SERVICE: {{ .Name }}
+
+{{ with service .Name }}
+
+  {{ range . }}
+
+    ADDRESS: {{ .Address }}
+    PORT: {{ .Port }}
+
+    TAGS:
+    {{ range .Tags }}
+      - {{ . }}
+    {{ end }}
+
+  {{ end }}
+
+{{ end }}
+
+----------------------------
+
+{{ end }}
