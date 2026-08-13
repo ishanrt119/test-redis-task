@@ -5,10 +5,13 @@ import requests
 def register_with_consul():
     port = int(os.getenv("SERVICE_PORT", "8000"))
 
+    service_id = f"home-service-{port}"
+
     consul_url = "http://127.0.0.1:8500/v1/agent/service/register"
 
     payload = {
-        "Name": "home-service",
+        "ID": service_id,
+        "Name": "auth-service",
         "Address": "127.0.0.1",
         "Port": port,
         "Check": {
@@ -26,4 +29,6 @@ def register_with_consul():
 
     response.raise_for_status()
 
-    print(f"Home service registered with Consul on port {port}")
+    print(
+        f"Auth service registered: {service_id} on port {port}"
+    )
